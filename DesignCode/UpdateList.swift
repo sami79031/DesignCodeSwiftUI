@@ -14,22 +14,33 @@ struct UpdateList: View {
     var body: some View {
         NavigationView {
             List(updates) { item in
-                NavigationLink(destination: Text("\(item.title)")) {
-                    VStack(alignment: .leading) {
-                        Text("\(item.title)")
-                            .font(.headline)
-                        Text("\(item.text)")
-                            .lineLimit(2)
-                            .lineSpacing(4)
-                            .font(.subheadline)
-                            .padding(.trailing)
-                            .padding(.top)
-                            .padding(.bottom)
+                
+                NavigationLink(destination: UpdateDetail(item: item)) {
+                    HStack(spacing: 12.0) {
+                        Image(item.image)
+                            .resizable()
+                            .aspectRatio(contentMode: .fit)
+                            .frame(width: 80, height: 80)
+                            .background(Color("background"))
+                            .cornerRadius(20)
                         
-                        Text("\(item.date)")
-                            .font(.caption)
+                        VStack(alignment: .leading) {
+                            Text("\(item.title)")
+                                .font(.headline)
+                            Text("\(item.text)")
+                                .lineLimit(2)
+                                .lineSpacing(3)
+                                .font(.subheadline)
+                                .padding(.trailing)
+                                .padding(.top)
+                                .padding(.bottom)
+                            
+                            Text("\(item.date)")
+                                .font(.caption)
+                        }
                     }
                 }
+                .padding(.vertical, 8.0)
             }
             .navigationBarTitle(Text("Updates"))
             .navigationBarItems(trailing:
